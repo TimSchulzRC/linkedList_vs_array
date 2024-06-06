@@ -16,6 +16,7 @@ linked_list* make_linked_list(double value);
 void append_to_linked_list(linked_list** head, int value);
 void free_linked_list(linked_list *head);
 double get_from_linked_list(linked_list *head, int index);
-void delete_from_linked_list(linked_list **head, int index);
+void delete_from_linked_list(linked_list **head, double key);
+void delete_from_linked_list_at_index(linked_list **head, int index);
 void delete_last_from_linked_list(linked_list **head);
 void delete_first_from_linked_list(linked_list **head);

@@ -5,6 +5,8 @@
 #include <stdlib.h>
 
 int main(void) {
+    srand(time(NULL));
+
     int elements_to_append = 100000;
 
     struct timespec start, end;
@@ -128,12 +130,24 @@ int main(void) {
                    (end.tv_nsec - start.tv_nsec) / 1e9;
     printf("Elapsed time deleting first element from linkedlist: %.9f seconds\n", elapsed_time);
 
-    printf("\n");
+
+    printf("\n\n");
+
+
+    array_list* al2 = make_array_list(0);
+    for (int i = 0; i < elements_to_append; i++) {
+        append_to_array_list(al2, i);
+    }
+
+    linked_list* ll2 = make_linked_list(0);
+    for (int i = 1; i < elements_to_append; i++) {
+        append_to_linked_list(&ll2, i);
+    }
 
     // benchmark deleting all elements from arraylist randomly
     clock_gettime(CLOCK_MONOTONIC, &start);
-    for (int i = 0; i < elements_to_append - 3; i++) {
-        delete_from_array_list(al, rand() % al->size);
+    for (int i = 0; i < elements_to_append; i++) {
+        delete_from_array_list(al2, rand() % al2->size);
     }
     clock_gettime(CLOCK_MONOTONIC, &end);
     elapsed_time = (end.tv_sec - start.tv_sec) +
@@ -142,20 +156,31 @@ int main(void) {
 
     // benchmark deleting all elements from linkedlist randomly
     clock_gettime(CLOCK_MONOTONIC, &start);
-    for (int i = 0; i < elements_to_append - 3; i++) {
-        delete_from_linked_list(&ll, rand() % elements_to_append);
+    for (int i = 0; i < elements_to_append -1; i++) {
+        delete_from_linked_list_at_index(&ll2, rand() % (elements_to_append - i));
     }
     clock_gettime(CLOCK_MONOTONIC, &end);
     elapsed_time = (end.tv_sec - start.tv_sec) +
                    (end.tv_nsec - start.tv_nsec) / 1e9;
     printf("Elapsed time randomly deleting all elements from linkedlist randomly: %.9f seconds\n", elapsed_time);
 
+    printf("\n\nArraylist: ");
+    printf("%zu",al2->size);
 
+    int counter = 0;
+    while(ll2->next != nullptr){
+        counter++;
+        ll2 = ll2->next;
+    }
+
+    printf("\n\nLinkedList: ");
+    printf("%d",counter);
 
     // free memory
     free_array_list(al);
     free_linked_list(ll);
-
+    free_array_list(al2);
+    free_linked_list(ll2);
 
     return 0;
 }

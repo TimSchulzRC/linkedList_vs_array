@@ -35,7 +35,7 @@ double get_from_linked_list(linked_list *head, int index){
     return temp->value;
 }
 
-void delete_from_linked_list(linked_list **head, int key){
+void delete_from_linked_list(linked_list **head, double key){
     linked_list* temp = *head;
     linked_list* prev = nullptr;
 
@@ -54,6 +54,12 @@ void delete_from_linked_list(linked_list **head, int key){
 
     prev->next = temp->next;
     free(temp);
+}
+
+void delete_from_linked_list_at_index(linked_list** head, int index){
+    linked_list* temp = *head;
+    double value = get_from_linked_list(temp, index);
+    delete_from_linked_list(head,value);
 }
 
 void delete_last_from_linked_list(linked_list **head){
