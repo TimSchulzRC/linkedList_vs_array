@@ -16,3 +16,4 @@ array_list *make_array_list(size_t initial_capacity);
 void free_array_list(array_list *list);
 void append_to_array_list(array_list *list, double value);
 void delete_from_array_list(array_list *list, int index);
+void insert_into_array_list(array_list *list, int index, double value);

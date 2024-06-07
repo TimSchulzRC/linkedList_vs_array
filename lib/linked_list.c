@@ -26,6 +26,23 @@ void append_to_linked_list(linked_list** head, int value){
     temp->next = n;
 }
 
+void insert_into_linked_list(linked_list** head, int index, double value){
+    linked_list* n = make_linked_list(value);
+    if (index == 0) {
+        n->next = *head;
+        *head = n;
+        return;
+    }
+
+    linked_list* temp = *head;
+    for (size_t i = 0; i < index - 1; i++) {
+        if (temp == nullptr) return;
+        temp = temp->next;
+    }
+    n->next = temp->next;
+    temp->next = n;
+}
+
 double get_from_linked_list(linked_list *head, int index){
     linked_list* temp = head;
     for (size_t i = 0; i < index; i++) {

@@ -20,3 +20,4 @@ void delete_from_linked_list(linked_list **head, double key);
 void delete_from_linked_list_at_index(linked_list **head, int index);
 void delete_last_from_linked_list(linked_list **head);
 void delete_first_from_linked_list(linked_list **head);
+void insert_into_linked_list(linked_list** head, int index, double value);
